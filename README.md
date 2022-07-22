@@ -8,4 +8,8 @@
 
    ```bash
    $ git clone https://github.com/xartd0/Discord-RPC-Yandex.Music.git
+   $ cd Discord-RPC-Yandex.Music
+   $ pip install pypresence
+   $ pip install PyQt5
+   $ pip install PyQtWebEngine
    ```
