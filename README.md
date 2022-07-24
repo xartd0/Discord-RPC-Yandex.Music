@@ -1,16 +1,9 @@
 # YandexMusic Discord RPC
 
-![изображение](https://user-images.githubusercontent.com/43171120/180476409-2aa52073-9bc6-48db-9430-3839b2ba0ab7.png)
+![изображение](https://user-images.githubusercontent.com/43171120/180656388-4abc2553-f256-4308-bd37-854e751b87bb.png)
 
 ### Installation
 
-1. Clone the repo
+Загрузите последний релиз
 
-   ```bash
-   $ git clone https://github.com/xartd0/Discord-RPC-Yandex.Music.git
-   $ cd Discord-RPC-Yandex.Music
-   $ pip install pypresence
-   $ pip install PyQt5
-   $ pip install PyQtWebEngine
-   $ python3 core.py
-   ```
+![изображение](https://user-images.githubusercontent.com/43171120/180656467-066ba117-f56c-44e0-be5f-8bd4f0e27478.png)
