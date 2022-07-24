@@ -1,4 +1,3 @@
-from ast import arg
 import sys
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
@@ -7,11 +6,14 @@ from PyQt5.QtWebEngineWidgets import QWebEngineView, QWebEnginePage
 from threading import Thread
 from threading import Timer
 from pypresence import Presence
+import time
 
 client_id = "948644686178967573"
 
 RPC = Presence(client_id=client_id)
 RPC.connect()
+
+left_sec = ''
 
 class WebEnginePage(QWebEnginePage):
 
@@ -42,11 +44,31 @@ class MainWindow(QMainWindow):
 
     def check(self):
         self.injectjs("externalAPI.getCurrentTrack()", self.get_yandex_data)
+        self.injectjs("externalAPI.getProgress();", self.get_seconds_data)
+
+    def get_seconds_data(self, data):
+        global left_sec
+        self.data=data
+        dur = int(self.data['duration'])
+        pos = int(self.data['position'])
+        left_sec = time.strftime("%M:%S", time.gmtime(dur - pos))
 
     def get_yandex_data(self, data):
+        global left_sec
         self.data=data
         if self.data is not None:
-            RPC.update(large_image='https://' + self.data['cover'].replace(r'%%', '400x400'), details=f"{self.data['artists'][0]['title']} - {self.data['album']['title']}", buttons=[{"label": "🎶 Слушать", "url": 'https://music.yandex.ru/' + self.data['link']}])
+            if self.data['album']['title'] != self.data['title']:
+                RPC.update(
+                    large_image='https://' + self.data['cover'].replace(r'%%', '400x400'),
+                    details=f"{self.data['album']['title']} | {self.data['artists'][0]['title']}" ,
+                    state=f"{self.data['title']} | {left_sec}",
+                    buttons=[{"label": "🎶 Слушать", "url": 'https://music.yandex.ru/' + self.data['link']}])
+            else:
+                RPC.update(
+                    large_image='https://' + self.data['cover'].replace(r'%%', '400x400'),
+                    details=f"{self.data['artists'][0]['title']}" ,
+                    state=f"{self.data['title']} | {left_sec}",
+                    buttons=[{"label": "🎶 Слушать", "url": 'https://music.yandex.ru/' + self.data['link']}])
 
     def onLoadFinished(self, ok):
         if ok:
