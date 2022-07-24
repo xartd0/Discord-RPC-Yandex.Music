@@ -12,4 +12,5 @@
    $ pip install pypresence
    $ pip install PyQt5
    $ pip install PyQtWebEngine
+   $ python3 core.py
    ```
