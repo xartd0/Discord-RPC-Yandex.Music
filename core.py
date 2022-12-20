@@ -47,11 +47,14 @@ class MainWindow(QMainWindow):
         self.injectjs("externalAPI.getProgress();", self.get_seconds_data)
 
     def get_seconds_data(self, data):
-        global left_sec
-        self.data=data
-        dur = int(self.data['duration'])
-        pos = int(self.data['position'])
-        left_sec = time.strftime("%M:%S", time.gmtime(dur - pos))
+        try:
+            global left_sec
+            self.data=data
+            dur = int(self.data['duration'])
+            pos = int(self.data['position'])
+            left_sec = time.strftime("%M:%S", time.gmtime(dur - pos))
+        except:
+            print( 'externalAPI is not defined' )
 
     def get_yandex_data(self, data):
         global left_sec
