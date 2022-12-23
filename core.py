@@ -6,12 +6,17 @@ from PyQt5.QtWebEngineWidgets import QWebEngineView, QWebEnginePage
 from threading import Thread
 from threading import Timer
 from pypresence import Presence
+from pypresence import exceptions
 import time
 
 client_id = "948644686178967573"
 
-RPC = Presence(client_id=client_id)
-RPC.connect()
+try:
+    RPC = Presence(client_id=client_id)
+    RPC.connect()
+except exceptions.DiscordNotFound:
+    print('Запустите discord.')
+    exit()
 
 left_sec = ''
 
