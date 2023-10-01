@@ -70,13 +70,19 @@ class MainWindow(QMainWindow):
                     large_image='https://' + self.data['cover'].replace(r'%%', '400x400'),
                     details=f"{self.data['album']['title']} | {self.data['artists'][0]['title']}" ,
                     state=f"{self.data['title']} | {left_sec}",
-                    buttons=[{"label": "🎶 Слушать", "url": 'https://music.yandex.ru/' + self.data['link']}])
+                    buttons=[
+                        {"label": "🎶 Слушать", "url": 'https://music.yandex.ru/' + self.data['link']},
+                        {"label": "By xartd0", "url": 'https://github.com/xartd0'}
+                        ])
             else:
                 RPC.update(
                     large_image='https://' + self.data['cover'].replace(r'%%', '400x400'),
                     details=f"{self.data['artists'][0]['title']}" ,
                     state=f"{self.data['title']} | {left_sec}",
-                    buttons=[{"label": "🎶 Слушать", "url": 'https://music.yandex.ru/' + self.data['link']}])
+                    buttons=[
+                        {"label": "🎶 Слушать", "url": 'https://music.yandex.ru/' + self.data['link']},
+                        {"label": "By xartd0", "url": 'https://github.com/xartd0'}
+                        ])
 
     def onLoadFinished(self, ok):
         if ok:
